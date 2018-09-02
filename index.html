@@ -17,7 +17,7 @@
 <meta name="twitter:title" content="Hengo">
   
   
-    <link rel="icon" href="/assets/img/favicon.ico">
+    <link rel="icon" href="/assets/img/blogger.png">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -157,7 +157,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>Java内存模型</strong>、<strong>Java对象模</strong>型和<strong>JVM内存结构</strong>这三个知识点，可以说是一个Java初中级程序员进阶高级程序员的一个必经过程。这里将这三个不同的概念进行梳理。</p>
-<h2 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a>JVM内存结构</h2><p>Java代码是运行在JVM之上，也就是Java为什么可以一次编译，到处运行的主要原因。JVM在执行Java的过程中会把所管理的内存划分为若干个不同的数据区域，每个区域都有不同的用途。下图是JVM运行时的内存结构。<br><img src="http://wx2.sinaimg.cn/mw690/006YxpfSgy1fuomv1bju1j30mk0dldg1.jpg" alt="enter image description here"><br>有些区域随着虚拟机进程的启动而存在，有些区域依赖用户线程的启动和结束而建立和销毁。</p>
+<h3 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a>JVM内存结构</h3><p>Java代码是运行在JVM之上，也就是Java为什么可以一次编译，到处运行的主要原因。JVM在执行Java的过程中会把所管理的内存划分为若干个不同的数据区域，每个区域都有不同的用途。下图是JVM运行时的内存结构。</p>
         
           <a class="article-more-a" href="/2018/09/02/jvm/#more">more >></a>
         
@@ -242,7 +242,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>看的这个问题的时候？我的第一反应是：i++还有线程安全问题？？</p>
-<p>先看一下下面的一个例子，来看看i++到底是不是线程安全的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 1000个线程，每个线程对共享变量count进行1000次++操作</span><br><span class="line">static int count = 0;</span><br><span class="line">static CountDownLatch cdl = new CountDownLatch(1000);</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) throws Exception &#123;</span><br><span class="line">    CountRunnable countRunnable = new CountRunnable();</span><br><span class="line">    for (int i = 0; i &lt; 1000; i++) &#123;</span><br><span class="line">        new Thread(countRunnable).start();</span><br><span class="line">    &#125;</span><br><span class="line">    cdl.await();</span><br><span class="line">    System.out.println(count);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static class CountRunnable implements Runnable &#123;</span><br><span class="line">    private void count() &#123;</span><br><span class="line">        for (int i = 0; i &lt; 1000; i++) &#123;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        count();</span><br><span class="line">        cdl.countDown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>先看一下下面的一个例子，来看看i++到底是不是线程安全的：</p>
         
           <a class="article-more-a" href="/2018/09/01/i++/#more">more >></a>
         
@@ -396,6 +396,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
@@ -405,10 +409,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java对象模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
             
             <div class="clearfix"></div>

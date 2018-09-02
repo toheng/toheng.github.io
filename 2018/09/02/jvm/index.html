@@ -8,25 +8,25 @@
   <link rel="dns-prefetch" href="https://toheng.github.io">
   <title>Java内存模型、Java对象模型和JVM内存结构 | Hengo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java内存模型、Java对象模型和JVM内存结构这三个知识点，可以说是一个Java初中级程序员进阶高级程序员的一个必经过程。这里将这三个不同的概念进行梳理。 JVM内存结构Java代码是运行在JVM之上，也就是Java为什么可以一次编译，到处运行的主要原因。JVM在执行Java的过程中会把所管理的内存划分为若干个不同的数据区域，每个区域都有不同的用途。下图是JVM运行时的内存结构。有些区域随着虚">
+  <meta name="description" content="Java内存模型、Java对象模型和JVM内存结构这三个知识点，可以说是一个Java初中级程序员进阶高级程序员的一个必经过程。这里将这三个不同的概念进行梳理。 JVM内存结构Java代码是运行在JVM之上，也就是Java为什么可以一次编译，到处运行的主要原因。JVM在执行Java的过程中会把所管理的内存划分为若干个不同的数据区域，每个区域都有不同的用途。下图是JVM运行时的内存结构。">
 <meta name="keywords" content="JVM,JMM,Java对象模型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java内存模型、Java对象模型和JVM内存结构">
 <meta property="og:url" content="https://toheng.github.io/2018/09/02/jvm/index.html">
 <meta property="og:site_name" content="Hengo">
-<meta property="og:description" content="Java内存模型、Java对象模型和JVM内存结构这三个知识点，可以说是一个Java初中级程序员进阶高级程序员的一个必经过程。这里将这三个不同的概念进行梳理。 JVM内存结构Java代码是运行在JVM之上，也就是Java为什么可以一次编译，到处运行的主要原因。JVM在执行Java的过程中会把所管理的内存划分为若干个不同的数据区域，每个区域都有不同的用途。下图是JVM运行时的内存结构。有些区域随着虚">
+<meta property="og:description" content="Java内存模型、Java对象模型和JVM内存结构这三个知识点，可以说是一个Java初中级程序员进阶高级程序员的一个必经过程。这里将这三个不同的概念进行梳理。 JVM内存结构Java代码是运行在JVM之上，也就是Java为什么可以一次编译，到处运行的主要原因。JVM在执行Java的过程中会把所管理的内存划分为若干个不同的数据区域，每个区域都有不同的用途。下图是JVM运行时的内存结构。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://wx2.sinaimg.cn/mw690/006YxpfSgy1fuomv1bju1j30mk0dldg1.jpg">
 <meta property="og:image" content="http://wx4.sinaimg.cn/mw690/006YxpfSgy1fuonhhtsllj30br0ah0st.jpg">
 <meta property="og:image" content="http://wx3.sinaimg.cn/mw690/006YxpfSgy1fuoo1ncsn2j31840js429.jpg">
-<meta property="og:updated_time" content="2018-09-02T06:35:42.118Z">
+<meta property="og:updated_time" content="2018-09-02T07:20:13.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java内存模型、Java对象模型和JVM内存结构">
-<meta name="twitter:description" content="Java内存模型、Java对象模型和JVM内存结构这三个知识点，可以说是一个Java初中级程序员进阶高级程序员的一个必经过程。这里将这三个不同的概念进行梳理。 JVM内存结构Java代码是运行在JVM之上，也就是Java为什么可以一次编译，到处运行的主要原因。JVM在执行Java的过程中会把所管理的内存划分为若干个不同的数据区域，每个区域都有不同的用途。下图是JVM运行时的内存结构。有些区域随着虚">
+<meta name="twitter:description" content="Java内存模型、Java对象模型和JVM内存结构这三个知识点，可以说是一个Java初中级程序员进阶高级程序员的一个必经过程。这里将这三个不同的概念进行梳理。 JVM内存结构Java代码是运行在JVM之上，也就是Java为什么可以一次编译，到处运行的主要原因。JVM在执行Java的过程中会把所管理的内存划分为若干个不同的数据区域，每个区域都有不同的用途。下图是JVM运行时的内存结构。">
 <meta name="twitter:image" content="http://wx2.sinaimg.cn/mw690/006YxpfSgy1fuomv1bju1j30mk0dldg1.jpg">
   
   
-    <link rel="icon" href="/assets/img/favicon.ico">
+    <link rel="icon" href="/assets/img/blogger.png">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
@@ -164,8 +164,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>Java内存模型</strong>、<strong>Java对象模</strong>型和<strong>JVM内存结构</strong>这三个知识点，可以说是一个Java初中级程序员进阶高级程序员的一个必经过程。这里将这三个不同的概念进行梳理。</p>
-<h2 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a>JVM内存结构</h2><p>Java代码是运行在JVM之上，也就是Java为什么可以一次编译，到处运行的主要原因。JVM在执行Java的过程中会把所管理的内存划分为若干个不同的数据区域，每个区域都有不同的用途。下图是JVM运行时的内存结构。<br><img src="http://wx2.sinaimg.cn/mw690/006YxpfSgy1fuomv1bju1j30mk0dldg1.jpg" alt="enter image description here"><br>有些区域随着虚拟机进程的启动而存在，有些区域依赖用户线程的启动和结束而建立和销毁。</p>
+<h3 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a>JVM内存结构</h3><p>Java代码是运行在JVM之上，也就是Java为什么可以一次编译，到处运行的主要原因。JVM在执行Java的过程中会把所管理的内存划分为若干个不同的数据区域，每个区域都有不同的用途。下图是JVM运行时的内存结构。</p>
 <a id="more"></a>
+<p><img src="http://wx2.sinaimg.cn/mw690/006YxpfSgy1fuomv1bju1j30mk0dldg1.jpg" alt="enter image description here"><br>有些区域随着虚拟机进程的启动而存在，有些区域依赖用户线程的启动和结束而建立和销毁。</p>
 <ul>
 <li>运行时常量池用于存放编译器生成的各种字面量和符号应用，但并不是所有常量只有在编译期才能产生，比如在运行期，<code>String.intern</code>也会把新的常量放入池中。</li>
 <li>除了以上JVM运行时内存外，还有直接内存可以供使用，Java虚拟机规范没有定义直接内存，不由JVM管理，是利用本地方法库直接在堆外申请的内存区域。</li>
@@ -174,11 +175,11 @@
 <blockquote>
 <p>总结，JVM内存结构，由Java虚拟机规范定义。描述的是Java程序执行过程中，由JVM管理的不同数据区域。各个区域有其特定的功能。</p>
 </blockquote>
-<h2 id="内存模型（JMM）"><a href="#内存模型（JMM）" class="headerlink" title="内存模型（JMM）"></a>内存模型（JMM）</h2><p>Java堆和方法区的区域是多个线程共享的数据区域，也就是说，多个线程可能可以操作保存在堆或者方法区中的同一个数据。这也就是我们常说的“Java的线程间通过共享内存进行通信”。</p>
+<h3 id="内存模型（JMM）"><a href="#内存模型（JMM）" class="headerlink" title="内存模型（JMM）"></a>内存模型（JMM）</h3><p>Java堆和方法区的区域是多个线程共享的数据区域，也就是说，多个线程可能可以操作保存在堆或者方法区中的同一个数据。这也就是我们常说的“Java的线程间通过共享内存进行通信”。</p>
 <p>JMM是和多线程相关的，他描述了一组规则或规范，这个规范定义了一个线程对共享变量的写入时对另一个线程是可见的。</p>
 <p>总结下，<strong>Java的多线程之间是通过共享内存进行通信的</strong>，而由于采用共享内存进行通信，在通信过程中会存在一系列如可见性、原子性、顺序性等问题，而JMM就是围绕着多线程通信以及与其相关的一系列特性而建立的模型。JMM定义了一些语法集，这些语法集映射到Java语言中就是<code>volatile</code>、<code>synchronized</code>等关键字。</p>
 <p><img src="http://wx4.sinaimg.cn/mw690/006YxpfSgy1fuonhhtsllj30br0ah0st.jpg" alt="enter"></p>
-<h2 id="Java对象模型"><a href="#Java对象模型" class="headerlink" title="Java对象模型"></a>Java对象模型</h2><p>Java是一种面向对象的语言，而Java对象在JVM中的存储也是有一定的结构的。而这个关于Java对象自身的存储模型称之为Java对象模型。</p>
+<h3 id="Java对象模型"><a href="#Java对象模型" class="headerlink" title="Java对象模型"></a>Java对象模型</h3><p>Java是一种面向对象的语言，而Java对象在JVM中的存储也是有一定的结构的。而这个关于Java对象自身的存储模型称之为Java对象模型。</p>
 <p>HotSpot虚拟机中，设计了一个OOP-Klass Model。OOP（Ordinary Object Pointer）指的是普通对象指针，而Klass用来描述对象实例的具体类型。</p>
 <p>每一个Java类，在被JVM加载的时候，JVM会给这个类创建一个instanceKlass，保存在方法区，用来在JVM层表示该Java类。当我们在Java代码中，使用new创建一个对象的时候，JVM会创建一个instanceOopDesc对象，这个对象中包含了对象头以及实例数据。</p>
 <p><img src="http://wx3.sinaimg.cn/mw690/006YxpfSgy1fuoo1ncsn2j31840js429.jpg" alt=""></p>
@@ -406,6 +407,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
@@ -415,10 +420,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java对象模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
             
             <div class="clearfix"></div>
