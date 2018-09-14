@@ -16,10 +16,12 @@
 <meta property="og:site_name" content="Hengo">
 <meta property="og:description" content="在秒杀、全局递增ID等场景需要加锁处理，大部分的解决方案是基于DB实现的，Redis为单进程单线程模式，采用队列模式将并发访问变成串行访问，且多客户端对Redis的连接并不存在竞争关系。 其次Redis提供一些命令SETNX，GETSET，可以方便实现分布式锁机制。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-05T15:44:11.940Z">
+<meta property="og:image" content="http://wx4.sinaimg.cn/mw690/006YxpfSgy1fv9ghb891tj30rc0j7dh5.jpg">
+<meta property="og:updated_time" content="2018-09-14T14:55:53.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis实现分布式锁">
 <meta name="twitter:description" content="在秒杀、全局递增ID等场景需要加锁处理，大部分的解决方案是基于DB实现的，Redis为单进程单线程模式，采用队列模式将并发访问变成串行访问，且多客户端对Redis的连接并不存在竞争关系。 其次Redis提供一些命令SETNX，GETSET，可以方便实现分布式锁机制。">
+<meta name="twitter:image" content="http://wx4.sinaimg.cn/mw690/006YxpfSgy1fv9ghb891tj30rc0j7dh5.jpg">
   
   
     <link rel="icon" href="/assets/img/blogger.png">
@@ -227,6 +229,7 @@
 <p><strong>为了让这个锁更加强壮，获取锁的客户端，应该在调用关键业务时，再次调用GET方法获取T1，和写入的T0时间戳进行对比，以免锁因其他情况被执行DEL意外解开而不知道</strong>。但是如果遇到上面描述得问题，则T0则会与T1不一致，当然差别一般会很小。这就是锁覆盖问题。</p>
 <p><strong>锁覆盖会导致什么问题呢？</strong></p>
 <p>当客户端的锁过期时间被覆盖，会造成锁不具有标识性，会造成客户端无法释放锁（客户端只能释放明确自己持有的锁）。</p>
+<p>下图为Redis分布式锁的流程图：<br><img src="http://wx4.sinaimg.cn/mw690/006YxpfSgy1fv9ghb891tj30rc0j7dh5.jpg" alt="Redis分布式锁流程图"></p>
 
       
 
