@@ -136,6 +136,260 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-mysql3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/28/mysql3/">数据库（三）：MySQL数据库结构优化</a>
+    </h1>
+  
+
+        
+        <a href="/2018/09/28/mysql3/" class="archive-article-date">
+  	<time datetime="2018-09-28T08:02:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>良好的数据库逻辑设计和物理设计是数据库获得高性能的基础</p>
+</blockquote>
+<h2 id="1-数据库结构优化的目的"><a href="#1-数据库结构优化的目的" class="headerlink" title="1.  数据库结构优化的目的"></a>1.  数据库结构优化的目的</h2><ul>
+<li>减少数据冗余</li>
+<li>尽量避免数据维护中出现更新，插入和删除异常</li>
+<li><ul>
+<li><strong>插入异常</strong>：如果表中的某个实体随着另一个实体而存在</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>更新异常</strong>：如果更改表中某个实体的单独属性时，需要对多行进行更新</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>删除异常</strong>：如果删除表中的某一个实体，则会导致其他实体的消失</li>
+</ul>
+</li>
+<li>节约数据库的存储空间</li>
+</ul>
+        
+          <a class="article-more-a" href="/2018/09/28/mysql3/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/09/28/mysql3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-mysql2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/26/mysql2/">数据库（二）：MySQL基准测试</a>
+    </h1>
+  
+
+        
+        <a href="/2018/09/26/mysql2/" class="archive-article-date">
+  	<time datetime="2018-09-26T03:10:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>基准测试是针对系统设置的一种压力测试</p>
+<ul>
+<li><strong>基准测试</strong>：直接、简单、易于比较、用于评估服务器的处理能力。不关心业务逻辑，所使用的数据和查询也是真实用不到的。</li>
+<li><strong>压力测试</strong>：对真实的业务数据进行测试，获得真实系统所能承受的压力。针对不同主题，所用到的数据和查询也是真实用到的。</li>
+</ul>
+        
+          <a class="article-more-a" href="/2018/09/26/mysql2/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/09/26/mysql2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-mysql1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/25/mysql1/">数据库（一）：影响MySQL数据库性能的因素</a>
+    </h1>
+  
+
+        
+        <a href="/2018/09/25/mysql1/" class="archive-article-date">
+  	<time datetime="2018-09-25T03:12:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-影响数据库的因素"><a href="#1-影响数据库的因素" class="headerlink" title="1. 影响数据库的因素"></a>1. 影响数据库的因素</h2><blockquote>
+<p>SQL查询速度、服务器硬件、网卡流量、磁盘IO</p>
+</blockquote>
+<p><strong>超高的QPS和TPS</strong>：效率低下的SQL。（QPS：每秒钟处理的查询量，TPS：每秒钟处理的事务数）<br><strong>大量的并发</strong>：数据库连接数被占满（max_connection默认为100，按需要进行修改）<br><strong>超高的CPU使用率</strong>：因CPU资源耗尽而出现宕机<br><strong>磁盘IO</strong>：磁盘IO的性能突然下降（使用更快的磁盘设备），其它大量消耗磁盘性能的计划任务（调整计划任务）<br><strong>网卡流量</strong>：网卡IO被占满，导致无法连接数据库。（减少从服务器的数量、进行分级缓存、避免使用“<code>select *</code>”进行查询、分离业务网络和服务器网络）</p>
+        
+          <a class="article-more-a" href="/2018/09/25/mysql1/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/09/25/mysql1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-redis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -478,10 +732,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
@@ -491,6 +741,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java对象模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">

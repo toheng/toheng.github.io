@@ -6,15 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://toheng.github.io">
-  <title>Tag: Redis | Hengo</title>
+  <title>数据库（三）：MySQL数据库结构优化 | Hengo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hengo">
-<meta property="og:url" content="https://toheng.github.io/tags/Redis/index.html">
+  <meta name="description" content="良好的数据库逻辑设计和物理设计是数据库获得高性能的基础  1.  数据库结构优化的目的 减少数据冗余 尽量避免数据维护中出现更新，插入和删除异常  插入异常：如果表中的某个实体随着另一个实体而存在    更新异常：如果更改表中某个实体的单独属性时，需要对多行进行更新    删除异常：如果删除表中的某一个实体，则会导致其他实体的消失   节约数据库的存储空间">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库（三）：MySQL数据库结构优化">
+<meta property="og:url" content="https://toheng.github.io/2018/09/28/mysql3/index.html">
 <meta property="og:site_name" content="Hengo">
+<meta property="og:description" content="良好的数据库逻辑设计和物理设计是数据库获得高性能的基础  1.  数据库结构优化的目的 减少数据冗余 尽量避免数据维护中出现更新，插入和删除异常  插入异常：如果表中的某个实体随着另一个实体而存在    更新异常：如果更改表中某个实体的单独属性时，需要对多行进行更新    删除异常：如果删除表中的某一个实体，则会导致其他实体的消失   节约数据库的存储空间">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/005YhI8igy1fvpj4qwn0rj30p309iae5">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/005YhI8igy1fvpj5vv052j30nm04qwgx">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/005YhI8igy1fvpj6gshwxj30ov052myx">
+<meta property="og:updated_time" content="2018-09-28T12:35:06.597Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hengo">
+<meta name="twitter:title" content="数据库（三）：MySQL数据库结构优化">
+<meta name="twitter:description" content="良好的数据库逻辑设计和物理设计是数据库获得高性能的基础  1.  数据库结构优化的目的 减少数据冗余 尽量避免数据维护中出现更新，插入和删除异常  插入异常：如果表中的某个实体随着另一个实体而存在    更新异常：如果更改表中某个实体的单独属性时，需要对多行进行更新    删除异常：如果删除表中的某一个实体，则会导致其他实体的消失   节约数据库的存储空间">
+<meta name="twitter:image" content="https://ww1.sinaimg.cn/large/005YhI8igy1fvpj4qwn0rj30p309iae5">
   
   
     <link rel="icon" href="/assets/img/blogger.png">
@@ -134,64 +143,279 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-mysql3" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/05/redis/" class="archive-article-date">
-  	<time datetime="2018-09-05T15:43:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/05/redis/">Redis实现分布式锁</a>
+    <h1 class="article-title" itemprop="name">
+      数据库（三）：MySQL数据库结构优化
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/09/28/mysql3/" class="archive-article-date">
+  	<time datetime="2018-09-28T08:02:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>良好的数据库逻辑设计和物理设计是数据库获得高性能的基础</p>
+</blockquote>
+<h2 id="1-数据库结构优化的目的"><a href="#1-数据库结构优化的目的" class="headerlink" title="1.  数据库结构优化的目的"></a>1.  数据库结构优化的目的</h2><ul>
+<li>减少数据冗余</li>
+<li>尽量避免数据维护中出现更新，插入和删除异常</li>
+<li><ul>
+<li><strong>插入异常</strong>：如果表中的某个实体随着另一个实体而存在</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>更新异常</strong>：如果更改表中某个实体的单独属性时，需要对多行进行更新</li>
+</ul>
+</li>
+<li><ul>
+<li><strong>删除异常</strong>：如果删除表中的某一个实体，则会导致其他实体的消失</li>
+</ul>
+</li>
+<li>节约数据库的存储空间</li>
+</ul>
+<a id="more"></a>
+<h2 id="2-数据库设计步骤"><a href="#2-数据库设计步骤" class="headerlink" title="2. 数据库设计步骤"></a>2. 数据库设计步骤</h2><ul>
+<li><strong>需求分析</strong>：全面了解产品设计的<em>存储需求</em>、<em>数据处理需求</em>、<em>数据安全性和完整性</em></li>
+<li><strong>逻辑设计</strong>：设计数据的逻辑存储结构，数据实体之间的逻辑关系，解决数据冗余和数据维护异常</li>
+<li><strong>物理设计</strong>：根据所使用的数据库特点进行表结构的设计。</li>
+<li><ul>
+<li>关系型数据库：Orcle、SQLServer、MySQL、postgresSql</li>
+</ul>
+</li>
+<li><ul>
+<li>非关系型数据库：MongoDB、Redis、Hadoop</li>
+</ul>
+</li>
+<li><ul>
+<li>存储引擎：InnoDB、MyISAM</li>
+</ul>
+</li>
+<li>维护优化：根据实际情况对索引、存储结构等进行优化</li>
+</ul>
+<h2 id="3-数据库设计范式"><a href="#3-数据库设计范式" class="headerlink" title="3. 数据库设计范式"></a>3. 数据库设计范式</h2><blockquote>
+<p>设计出没有数据冗余和数据维护异常的数据库结构</p>
+</blockquote>
+<p><strong>1. 数据库设计的第一范式</strong></p>
+<ul>
+<li>数据库表中的所有字段都只具有单一属性</li>
+<li>单一属性的列是由基本的数据类型所构成</li>
+<li>设计出来的表都是简单的二维表</li>
+</ul>
+<p><strong>2. 数据库设计的第二范式</strong></p>
+<ul>
+<li>要求一个表中只具有一个业务主键，也就是说符合第二范式的表中不能存在非主键列只对部分主键的依赖关系。</li>
+</ul>
+<p><strong>3. 数据库设计的第三范式</strong></p>
+<ul>
+<li>指每一个非主属性既不部分依赖也不传递依赖于业务主键，也就是在第二范式的基础上消除了非主属性对主键的传递依赖。</li>
+</ul>
+<p><strong>4. 范式化设计的优缺点</strong><br><strong>优点</strong>：</p>
+<ul>
+<li>可以尽量的减少数据冗余</li>
+<li>范式化的更新操作比反范式化更快</li>
+<li>范式化的表通常比反范式化更小</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>对于查询需要对多个表进行关联</li>
+<li>更难进行索引优化</li>
+</ul>
+<p><strong>5. 反范式化设计</strong></p>
+<blockquote>
+<p>反范式化是针对范式化而言的，为了性能和读取效率的考虑而适当的对数据库设计范式的要求进行违反，而允许存在少量的数据冗余，换而言之，就是<strong>空间换时间</strong>。</p>
+</blockquote>
+<p><strong>6. 反范式化的优缺点</strong><br><strong>优点</strong>：</p>
+<ul>
+<li>可以减少表的关联</li>
+<li>可以更好的进行索引优化</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>存在数据冗余及数据维护异常</li>
+<li>对数据的修改需要更多的成本</li>
+</ul>
+<h2 id="4-字符串类型的选择"><a href="#4-字符串类型的选择" class="headerlink" title="4. 字符串类型的选择"></a>4. 字符串类型的选择</h2><blockquote>
+<p>当一个列可以选择多种数据类型时，应该优先考虑数字类型，其次是日期或二进制类型，最后才是字符类型。<br>对于同级别的数据类型，优先选用占用空间小的数据类型。<br><img src="https://ww1.sinaimg.cn/large/005YhI8igy1fvpj4qwn0rj30p309iae5" alt=""><br><img src="https://ww1.sinaimg.cn/large/005YhI8igy1fvpj5vv052j30nm04qwgx" alt=""></p>
+</blockquote>
+<p><strong>1. 选择VARCHAR和CHAR类型</strong></p>
+<ul>
+<li>VARCHAR用于存储边长字符串，只占用<strong>必要</strong>的存储空间。（UTF-8一个字符占用三个字节）（VARCHAR是以字符为单位）</li>
+<li>列的最大长度小于255则只占用一个额外字节用于记录字符串长度</li>
+<li>列的最大长度大于255则要占用两个额外字节用于记录字符串长度</li>
+</ul>
+<p><strong>2. VARCHAR适合场景</strong></p>
+<ul>
+<li>字符串列的最大长度比平均长度大很多</li>
+<li>字符串列很少被更新</li>
+<li>使用了多字节字符集存储字符串</li>
+</ul>
+<p><strong>3. 如何选择VARCHAR</strong></p>
+<ul>
+<li>使用最小的符合需求的长度</li>
+<li>VARCHAR（5）和VARCHAR存储字符串性能不同</li>
+</ul>
+<p><strong>4. CHAR类型存储特点</strong></p>
+<ul>
+<li>CHAR类型时定长</li>
+<li>字符串存储在CHAR类型的列中会删除末尾的空格</li>
+<li>CHAR类型的最大宽度为255</li>
+</ul>
+<p><strong>5. CHAR适合场景</strong></p>
+<ul>
+<li>CHAR类型适合存储长度近似的值（比如固定的手机号，身份证号码）</li>
+<li>CHAR适合存储短字符串（比如男，女）</li>
+<li>CHAR适合存储经常被更新的字符串列</li>
+</ul>
+<h2 id="4-日期类型的选择"><a href="#4-日期类型的选择" class="headerlink" title="4. 日期类型的选择"></a>4. 日期类型的选择</h2><p><strong>1. DATATIME类型</strong><br><img src="https://ww1.sinaimg.cn/large/005YhI8igy1fvpj6gshwxj30ov052myx" alt=""></p>
+<ul>
+<li>DATATIME类型与时区无关</li>
+<li>占用8个字节存储空间</li>
+</ul>
+<p><strong>2. TIMESTAMP类型</strong></p>
+<ul>
+<li>时间戳，以<code>YYYY-MM-DD HH:MM:SS.[微秒]</code>格式显示</li>
+<li>占用4字节</li>
+<li>时间范围只能保存1970-01-01到2038-01-19</li>
+<li>依赖时区</li>
+</ul>
+<p><strong>3. DATE类型和TIME类型</strong></p>
+<ul>
+<li>比如存储用户生日，选择DATE即可<br><strong>DATE优点</strong></li>
+<li>占用字节数比字符串、datetime、int要少</li>
+<li>date只占3个字节</li>
+<li>使用Date类型还可以使用日期时间函数进行日期之间的计算<br><strong>注意事项</strong></li>
+<li>不要使用字符串类型来存储日期时间数据</li>
+<li>使用Int存储日期时间不如Timestamp类型</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">分布式锁</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://toheng.github.io/2018/09/28/mysql3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/09/26/mysql2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据库（二）：MySQL基准测试</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -214,9 +438,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
