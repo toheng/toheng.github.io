@@ -136,6 +136,90 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-mysql4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/28/mysql4/">数据库（四）：MySQL数据库索引优化</a>
+    </h1>
+  
+
+        
+        <a href="/2018/09/28/mysql4/" class="archive-article-date">
+  	<time datetime="2018-09-28T14:03:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-索引类型"><a href="#1-索引类型" class="headerlink" title="1. 索引类型"></a>1. 索引类型</h2><h3 id="1-B-tree索引"><a href="#1-B-tree索引" class="headerlink" title="1. B-tree索引"></a>1. B-tree索引</h3><ul>
+<li>B-tree索引是以B+数的结构存储数据（顺序存储的）</li>
+<li>B-tree索引可以加快数据的查询速度</li>
+<li>B-tree索引更适合进行范围查找</li>
+</ul>
+<h4 id="1-B树索引适合场景"><a href="#1-B树索引适合场景" class="headerlink" title="1. B树索引适合场景"></a>1. B树索引适合场景</h4><ul>
+<li>全值匹配查询<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">order_sn = `9876432143340`</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2018/09/28/mysql4/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/09/28/mysql4/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-mysql3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -238,7 +322,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/26/mysql2/">数据库（二）：MySQL基准测试</a>
+      <a class="article-title" href="/2018/09/26/mysql2/">数据库（二）：MySQL数据库基准测试</a>
     </h1>
   
 
@@ -732,6 +816,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
@@ -741,10 +829,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Java对象模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">

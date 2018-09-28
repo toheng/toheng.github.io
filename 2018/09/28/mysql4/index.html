@@ -6,15 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://toheng.github.io">
-  <title>Archives: 2018/9 | Hengo</title>
+  <title>数据库（四）：MySQL数据库索引优化 | Hengo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hengo">
-<meta property="og:url" content="https://toheng.github.io/archives/2018/09/index.html">
+  <meta name="description" content="1. 索引类型1. B-tree索引 B-tree索引是以B+数的结构存储数据（顺序存储的） B-tree索引可以加快数据的查询速度 B-tree索引更适合进行范围查找  1. B树索引适合场景 全值匹配查询1order_sn = `9876432143340`">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库（四）：MySQL数据库索引优化">
+<meta property="og:url" content="https://toheng.github.io/2018/09/28/mysql4/index.html">
 <meta property="og:site_name" content="Hengo">
+<meta property="og:description" content="1. 索引类型1. B-tree索引 B-tree索引是以B+数的结构存储数据（顺序存储的） B-tree索引可以加快数据的查询速度 B-tree索引更适合进行范围查找  1. B树索引适合场景 全值匹配查询1order_sn = `9876432143340`">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/005YhI8igy1fvpj87vfypj30n808ytcx">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/005YhI8igy1fvpldja1y8j30hr03hdh9">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/005YhI8igy1fvpleqozr8j30ku04umz4">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/005YhI8igy1fvplop7vhdj30ob08fn18">
+<meta property="og:updated_time" content="2018-09-28T14:06:15.518Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hengo">
+<meta name="twitter:title" content="数据库（四）：MySQL数据库索引优化">
+<meta name="twitter:description" content="1. 索引类型1. B-tree索引 B-tree索引是以B+数的结构存储数据（顺序存储的） B-tree索引可以加快数据的查询速度 B-tree索引更适合进行范围查找  1. B树索引适合场景 全值匹配查询1order_sn = `9876432143340`">
+<meta name="twitter:image" content="https://ww1.sinaimg.cn/large/005YhI8igy1fvpj87vfypj30n808ytcx">
   
   
     <link rel="icon" href="/assets/img/blogger.png">
@@ -134,36 +144,123 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-mysql4" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      数据库（四）：MySQL数据库索引优化
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/28/mysql4/" class="archive-article-date">
+
+        
+        <a href="/2018/09/28/mysql4/" class="archive-article-date">
   	<time datetime="2018-09-28T14:03:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-28</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/28/mysql4/">数据库（四）：MySQL数据库索引优化</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-索引类型"><a href="#1-索引类型" class="headerlink" title="1. 索引类型"></a>1. 索引类型</h2><h3 id="1-B-tree索引"><a href="#1-B-tree索引" class="headerlink" title="1. B-tree索引"></a>1. B-tree索引</h3><ul>
+<li>B-tree索引是以B+数的结构存储数据（顺序存储的）</li>
+<li>B-tree索引可以加快数据的查询速度</li>
+<li>B-tree索引更适合进行范围查找</li>
+</ul>
+<h4 id="1-B树索引适合场景"><a href="#1-B树索引适合场景" class="headerlink" title="1. B树索引适合场景"></a>1. B树索引适合场景</h4><ul>
+<li>全值匹配查询<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">order_sn = `9876432143340`</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>匹配最左前缀的查询</li>
+<li>匹配列前缀查询</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">order_sn like &apos;9876%&apos;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>匹配范围值得查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">order_sn &gt; `9876432143300`</span><br><span class="line">and order_sn &lt; `9876432143399`</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>精确匹配左前列并范围匹配另外一列</p>
+</li>
+<li>只访问索引的查询</li>
+</ul>
+<h4 id="2-B树索引的使用限制"><a href="#2-B树索引的使用限制" class="headerlink" title="2. B树索引的使用限制"></a>2. B树索引的使用限制</h4><ul>
+<li>如果不是按照索引最左列开始查找，则无法使用索引</li>
+<li>使用索引时不能跳过索引中的列</li>
+<li>not in 和 &lt;&gt;操作无法使用索引</li>
+<li>如果查询中有某个列的范围查询，则其右边所有列都无法使用索引</li>
+</ul>
+<h3 id="2-Hash索引"><a href="#2-Hash索引" class="headerlink" title="2. Hash索引"></a>2. Hash索引</h3><blockquote>
+<p>Hash索引是基于Hash表来实现的，只有查询条件精确匹配Hash索引中的所有列时，才能使用hash索引。<br>对于Hash索引中的所有列，存储引擎都会为每一行计算一个Hash码，Hash索引中存储的就是Hash码。</p>
+</blockquote>
+<p><strong>Hash索引的限制</strong></p>
+<ul>
+<li>Hash索引必须进行二次查找</li>
+<li>Hash索引无法排序</li>
+<li>Hash索引不支持部分查找也不支持范围查找</li>
+<li>Hash索引中Hash码的计算可能存在Hash冲突</li>
+</ul>
+<h3 id="3-为什么使用索引"><a href="#3-为什么使用索引" class="headerlink" title="3. 为什么使用索引"></a>3. 为什么使用索引</h3><ul>
+<li>索引大大减少了存储引擎需要扫描的数据量</li>
+<li>索引可以帮助我们进行排序以避免使用临时表</li>
+<li>索引可以把随机IO变成顺序IO</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>索引会增加写操作成本</li>
+<li>太多的索引会增加查询优化器的选择时间</li>
+</ul>
+<h3 id="4-索引优化策略"><a href="#4-索引优化策略" class="headerlink" title="4. 索引优化策略"></a>4. 索引优化策略</h3><p><strong>1. 索引列上不能使用表达式或函数</strong><br><img src="https://ww1.sinaimg.cn/large/005YhI8igy1fvpj87vfypj30n808ytcx" alt=""><br><strong>2. 前缀索引和索引列的选择性</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create index index_name on table(col_name(n));</span><br></pre></td></tr></table></figure></p>
+<p>索引的选择性是不重复的索引值和表记录数的比值。</p>
+<p><strong>3. 联合索引</strong><br><em>如何选择索引列的顺序</em></p>
+<ul>
+<li>经常被用到的列优先</li>
+<li>选择性高的列优先</li>
+<li>宽度小的列优先</li>
+</ul>
+<p><strong>4. 覆盖索引</strong><br><strong>优点</strong>：</p>
+<ul>
+<li>可以优化缓存，减少磁盘IO操作</li>
+<li>可以减少随机IO，变随机IO操作变为顺序IO操作</li>
+<li>可以避免对InnoDB主键索引的二次查询</li>
+<li>可以避免MyISAM表进行系统调用</li>
+</ul>
+<p><strong>缺点</strong>：<br><em>无法使用覆盖索引的情况</em></p>
+<ul>
+<li>存储引擎不支持覆盖索引</li>
+<li>查询中使用了太多的列</li>
+<li>使用了双%号的like查询<h3 id="5-使用索引来优化查询"><a href="#5-使用索引来优化查询" class="headerlink" title="5. 使用索引来优化查询"></a>5. 使用索引来优化查询</h3><strong>1. 使用索引扫描来优化排序</strong></li>
+<li>索引的列顺序和Order By子句顺序完全一致</li>
+<li>索引中所有的列的方向（升序，降序）和Order By子句完全一致</li>
+<li>Order by中的字段全部在关联表中的第一张表中</li>
+</ul>
+<p><strong>2. 模拟Hash索引优化查询</strong></p>
+<ul>
+<li>只能处理键值的全值匹配查找</li>
+<li>所使用的Hash函数决定着索引键的大小</li>
+</ul>
+<p><strong>3. 利用索引优化锁</strong></p>
+<ul>
+<li>索引可以减少锁定的行数</li>
+<li>索引可以加快处理速度，同时也加快了锁的释放</li>
+</ul>
+<h3 id="6-索引的维护和优化"><a href="#6-索引的维护和优化" class="headerlink" title="6. 索引的维护和优化"></a>6. 索引的维护和优化</h3><ul>
+<li>删除重复和冗余的索引<br><img src="https://ww1.sinaimg.cn/large/005YhI8igy1fvpldja1y8j30hr03hdh9" alt="重复"><br><img src="https://ww1.sinaimg.cn/large/005YhI8igy1fvpleqozr8j30ku04umz4" alt="冗余"></li>
+<li>查找重复和冗余的索引<br><code>pt-duplicate-key-checker</code> <a href="http://www.ywnds.com/?p=11025" target="_blank" rel="noopener">工具使用方法</a></li>
+<li>查找未被使用的索引<br><img src="https://ww1.sinaimg.cn/large/005YhI8igy1fvplop7vhdj30ob08fn18" alt=""></li>
+<li>更新索引统计信息及减少索引碎片<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">analyze table table_name</span><br></pre></td></tr></table></figure></li>
+</ul>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -175,259 +272,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://toheng.github.io/2018/09/28/mysql4/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/28/mysql3/" class="archive-article-date">
-  	<time datetime="2018-09-28T08:02:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-28</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/09/28/mysql3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据库（三）：MySQL数据库结构优化</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/28/mysql3/">数据库（三）：MySQL数据库结构优化</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/26/mysql2/" class="archive-article-date">
-  	<time datetime="2018-09-26T03:10:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/26/mysql2/">数据库（二）：MySQL数据库基准测试</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/25/mysql1/" class="archive-article-date">
-  	<time datetime="2018-09-25T03:12:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/25/mysql1/">数据库（一）：影响MySQL数据库性能的因素</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/05/redis/" class="archive-article-date">
-  	<time datetime="2018-09-05T15:43:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/05/redis/">Redis实现分布式锁</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">分布式锁</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/02/jvm/" class="archive-article-date">
-  	<time datetime="2018-09-02T00:55:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/02/jvm/">Java内存模型、Java对象模型和JVM内存结构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JMM</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java对象模型</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/01/i++/" class="archive-article-date">
-  	<time datetime="2018-09-01T05:36:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/01/i++/">i++的线程安全问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -450,8 +394,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
