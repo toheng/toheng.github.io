@@ -6,20 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://toheng.github.io">
-  <title>数据库（一）：影响MySQL数据库性能的因素 | Hengo</title>
+  <title>Tag: 算法 | Hengo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 影响数据库的因素 SQL查询速度、服务器硬件、网卡流量、磁盘IO  超高的QPS和TPS：效率低下的SQL。（QPS：每秒钟处理的查询量，TPS：每秒钟处理的事务数）大量的并发：数据库连接数被占满（max_connection默认为100，按需要进行修改）超高的CPU使用率：因CPU资源耗尽而出现宕机磁盘IO：磁盘IO的性能突然下降（使用更快的磁盘设备），其它大量消耗磁盘性能的计划任务（调整">
-<meta name="keywords" content="MySQL">
-<meta property="og:type" content="article">
-<meta property="og:title" content="数据库（一）：影响MySQL数据库性能的因素">
-<meta property="og:url" content="https://toheng.github.io/2018/09/25/mysql1/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hengo">
+<meta property="og:url" content="https://toheng.github.io/tags/算法/index.html">
 <meta property="og:site_name" content="Hengo">
-<meta property="og:description" content="1. 影响数据库的因素 SQL查询速度、服务器硬件、网卡流量、磁盘IO  超高的QPS和TPS：效率低下的SQL。（QPS：每秒钟处理的查询量，TPS：每秒钟处理的事务数）大量的并发：数据库连接数被占满（max_connection默认为100，按需要进行修改）超高的CPU使用率：因CPU资源耗尽而出现宕机磁盘IO：磁盘IO的性能突然下降（使用更快的磁盘设备），其它大量消耗磁盘性能的计划任务（调整">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-28T08:04:50.195Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据库（一）：影响MySQL数据库性能的因素">
-<meta name="twitter:description" content="1. 影响数据库的因素 SQL查询速度、服务器硬件、网卡流量、磁盘IO  超高的QPS和TPS：效率低下的SQL。（QPS：每秒钟处理的查询量，TPS：每秒钟处理的事务数）大量的并发：数据库连接数被占满（max_connection默认为100，按需要进行修改）超高的CPU使用率：因CPU资源耗尽而出现宕机磁盘IO：磁盘IO的性能突然下降（使用更快的磁盘设备），其它大量消耗磁盘性能的计划任务（调整">
+<meta name="twitter:title" content="Hengo">
   
   
     <link rel="icon" href="/assets/img/blogger.png">
@@ -139,207 +134,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-mysql1" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      数据库（一）：影响MySQL数据库性能的因素
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/04/12/bloomFilter/" class="archive-article-date">
+  	<time datetime="2019-04-12T07:06:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-12</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/04/12/bloomFilter/">判断一个元素是否存在亿级数据中</a>
     </h1>
   
 
-        
-        <a href="/2018/09/25/mysql1/" class="archive-article-date">
-  	<time datetime="2018-09-25T03:12:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-影响数据库的因素"><a href="#1-影响数据库的因素" class="headerlink" title="1. 影响数据库的因素"></a>1. 影响数据库的因素</h2><blockquote>
-<p>SQL查询速度、服务器硬件、网卡流量、磁盘IO</p>
-</blockquote>
-<p><strong>超高的QPS和TPS</strong>：效率低下的SQL。（QPS：每秒钟处理的查询量，TPS：每秒钟处理的事务数）<br><strong>大量的并发</strong>：数据库连接数被占满（max_connection默认为100，按需要进行修改）<br><strong>超高的CPU使用率</strong>：因CPU资源耗尽而出现宕机<br><strong>磁盘IO</strong>：磁盘IO的性能突然下降（使用更快的磁盘设备），其它大量消耗磁盘性能的计划任务（调整计划任务）<br><strong>网卡流量</strong>：网卡IO被占满，导致无法连接数据库。（减少从服务器的数量、进行分级缓存、避免使用“<code>select *</code>”进行查询、分离业务网络和服务器网络）</p>
-<a id="more"></a>
-<h2 id="2-影响数据库性能的因素"><a href="#2-影响数据库性能的因素" class="headerlink" title="2. 影响数据库性能的因素"></a>2. 影响数据库性能的因素</h2><p><strong>大表</strong>(记录行数巨大，单表超过千万行，表数据文件巨大，表数据文件超过10G)带来的影响：</p>
-<ol>
-<li><strong>慢查询</strong>：很难在一定时间内过滤所需要的数据</li>
-<li><strong>大表对DDL操作</strong>的影响：建立索引需要很长时间。</li>
-<li><strong>修改表结构</strong>需要长时间锁表（风险：会造成长时间的主从延迟，影响正常的数据操作）。MySQL版本 &lt; 5.5 简历索引会引起锁表，MySQL版本 &gt;= 5.5不会锁表但是会引起主从延迟。<br><strong>大事务</strong>带来的影响：<br>（大事务：运行时间比较长，操作数据比较多的事务）</li>
-<li>锁定太多的数据，造成大量的阻塞和锁超时。</li>
-<li>回滚时间比较长</li>
-<li>执行时间长，容易造成主从延迟<br>避免大事务带来的影响方法：</li>
-<li>避免一次处理太多的数据</li>
-<li>移出不必要在事务中的SELECT操作</li>
-</ol>
-<h2 id="3-处理数据库中的大表"><a href="#3-处理数据库中的大表" class="headerlink" title="3. 处理数据库中的大表"></a>3. 处理数据库中的大表</h2><ol>
-<li><code>分库分表</code>把一张大表分成多个小表：<br><strong>难点 1</strong>：分表主键的选择、分表后跨分区数据的查询和统计</li>
-<li>大表的历史数据归档，减少对前后端业务的影响：<br><strong>难点 2</strong>：归档时间点的选择、如何进行归档操作</li>
-</ol>
-<h2 id="4-影响性能的几个方面"><a href="#4-影响性能的几个方面" class="headerlink" title="4. 影响性能的几个方面"></a>4. 影响性能的几个方面</h2><ol>
-<li>服务器硬件</li>
-</ol>
-<ul>
-<li>CPU：对于并发比较高的场景，CPU数量比频率重要。对于CPU密集型场景和复杂SQL则频率越高越好。</li>
-<li>内存：选择主板能支持的最大频率</li>
-<li>IO子系统：PCIe &gt; SSD &gt; Raid &gt; 磁盘 &gt; SAN</li>
-</ul>
-<ol start="2">
-<li>服务器系统</li>
-<li>数据库存储引擎的选择：</li>
-</ol>
-<ul>
-<li>MyISAM：不支持事务，使用的表级锁</li>
-<li>InnoDB：事务级存储引擎，完美支持行级锁，事务ACID特性。</li>
-</ul>
-<ol start="4">
-<li>数据库参数配置</li>
-<li>数据库结构设计和SQL语句</li>
-</ol>
-<ul>
-<li>过分的反范式化为表建立太多的列</li>
-<li>过分的范式化造成太多的表关联</li>
-<li>在OLTP环境中使用了不恰当的分区表</li>
-<li>使用外键保证数据的完整性（效率很低）</li>
-</ul>
-<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h2><p><strong>性能优化顺序</strong></p>
-<ul>
-<li>数据库结构设计和SQL语句</li>
-<li>数据库存储引擎的选择和参数配置</li>
-<li>系统选择和优化</li>
-<li>硬件升级</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://toheng.github.io/2018/09/25/mysql1/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/09/26/mysql2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          数据库（二）：MySQL数据库基准测试
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/09/05/redis/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Redis实现分布式锁</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -362,9 +210,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
